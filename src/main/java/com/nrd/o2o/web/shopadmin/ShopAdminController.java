@@ -16,7 +16,7 @@ public class ShopAdminController {
 		return "shop/shopoperation";
 	}
 	/**
-	 * test的店铺列表
+	 * 用户的店铺列表
 	 * @return
 	 */
 	@RequestMapping(value = "/shoplist")
@@ -24,10 +24,18 @@ public class ShopAdminController {
 		return "shop/shoplist";
 	}
 	/**
-	 * test店铺管理页面
+	 * 用户店铺管理页面
 	 */
 	@RequestMapping(value = "/shopmanagement")
 	public String shopManagement() {
 		return "shop/shopmanagement";
+	}
+	/**
+	 * 用户商品类别管理页面
+	 * @return
+	 */
+	@RequestMapping(value = "/productcategorymanagement", method = RequestMethod.GET)
+	public String productCategoryManagement() {
+		return "shop/productcategorymanagement";
 	}
 }

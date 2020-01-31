@@ -23,8 +23,11 @@ public class ImageUtil {
 	private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 	private static final Random r = new Random();
 	private static Logger logger = LoggerFactory.getLogger(ImageUtil.class);
+	private static String stroePath;
+
 	/**
 	 * 处理缩略图,返回新生成图片的相对路径
+	 * 
 	 * @param thumbnail
 	 * @param targetAddr
 	 * @return
@@ -34,9 +37,9 @@ public class ImageUtil {
 		String extension = getFileExtension(fileName);
 		makeDirPath(targetAddr);
 		String relativeAddr = targetAddr + realFileName + extension;
-		logger.debug("current relativeAddr is:"+ relativeAddr);
-		File dest = new File(PathUtil.getImgBasePath()+relativeAddr);
-		logger.debug("current complete addr is:" + PathUtil.getImgBasePath()+relativeAddr);
+		logger.debug("current relativeAddr is:" + relativeAddr);
+		File dest = new File(PathUtil.getImgBasePath() + relativeAddr);
+		logger.debug("current complete addr is:" + PathUtil.getImgBasePath() + relativeAddr);
 		try {
 			Thumbnails.of(thumbnailInputStream).size(160, 160)
 					.watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "\\watermark.jpg")), 0.5f)
@@ -81,6 +84,24 @@ public class ImageUtil {
 		int randomNum = r.nextInt(89999) + 10000;
 		String nowTimeString = simpleDateFormat.format(new Date());
 		return nowTimeString + randomNum;
+	}
+
+	/**
+	 * 如果storePath是文件则删除该文件
+	 * 如果storePath是目录则删除该目录下所有文件
+	 * @param storePath
+	 */
+	public static void deleteFileOrPath(String storePath) {
+		File fileOrPath = new File(PathUtil.getImgBasePath() + storePath);
+		if (fileOrPath.exists()) {
+			if (fileOrPath.isDirectory()) {
+				File[] files = fileOrPath.listFiles();
+				for (File file : files) {
+					file.delete();
+				}
+			}
+			fileOrPath.delete();
+		}
 	}
 
 	public static void main(String[] args) throws IOException {

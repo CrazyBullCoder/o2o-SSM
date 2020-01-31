@@ -20,10 +20,11 @@ import com.nrd.o2o.entity.Shop;
 import com.nrd.o2o.entity.ShopCategory;
 import com.nrd.o2o.enums.ShopStateEnum;
 
-public class ShopServiceTest extends BaseTest{
+public class ShopServiceTest extends BaseTest {
 
 	@Autowired
 	private ShopService shopService;
+
 	@Test
 	public void testAddShop() throws FileNotFoundException {
 		Shop shop = new Shop();
@@ -48,7 +49,28 @@ public class ShopServiceTest extends BaseTest{
 		shop.setAdvice("审核中");
 		File shopImg = new File("E:\\Pictures\\1.jpg");
 		InputStream is = new FileInputStream(shopImg);
-		ShopExecution se = shopService.addShop(shop,is, shopImg.getName());
+		ShopExecution se = shopService.addShop(shop, is, shopImg.getName());
 		assertEquals(ShopStateEnum.CHECK.getState(), se.getState());
+	}
+
+	@Test
+	public void testModifyShop() throws FileNotFoundException {
+		Shop shop = new Shop();
+		shop.setShopId(1L);
+		shop.setShopName("修改后的店铺名称");
+		File shopImg = new File("E:\\Pictures\\2.jpg");
+		InputStream is = new FileInputStream(shopImg);
+		ShopExecution shopExecution = shopService.modifyShop(shop, is, shopImg.getName());
+		System.out.println("新的图片地址为：" + shopExecution.getShop().getShopImg());
+	}
+	@Test
+	public void testGetShopList() {
+		Shop shopCondition = new Shop();
+		ShopCategory sc = new ShopCategory();
+		sc.setShopCategoryId(3L);
+		shopCondition.setShopCategory(sc);
+		ShopExecution se = shopService.getShopList(shopCondition, 0, 2);
+		System.out.println(se.getShopList().size());//1
+		System.out.println(se.getCount());
 	}
 }

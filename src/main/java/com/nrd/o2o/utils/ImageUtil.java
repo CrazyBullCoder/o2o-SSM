@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.nrd.o2o.dto.ImageHolder;
 import com.nrd.o2o.web.superadmin.AreaController;
 
 import net.coobird.thumbnailator.Thumbnails;
@@ -32,16 +33,16 @@ public class ImageUtil {
 	 * @param targetAddr
 	 * @return
 	 */
-	public static String generateThumbnail(InputStream thumbnailInputStream, String fileName, String targetAddr) {
+	public static String generateThumbnail(ImageHolder thumbnail, String targetAddr) {
 		String realFileName = getRandomFileName();
-		String extension = getFileExtension(fileName);
+		String extension = getFileExtension(thumbnail.getImageName());
 		makeDirPath(targetAddr);
 		String relativeAddr = targetAddr + realFileName + extension;
 		logger.debug("current relativeAddr is:" + relativeAddr);
 		File dest = new File(PathUtil.getImgBasePath() + relativeAddr);
 		logger.debug("current complete addr is:" + PathUtil.getImgBasePath() + relativeAddr);
 		try {
-			Thumbnails.of(thumbnailInputStream).size(160, 160)
+			Thumbnails.of(thumbnail.getImage()).size(160, 160)
 					.watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "\\watermark.jpg")), 0.5f)
 					.outputQuality(0.8).toFile(dest);
 		} catch (Exception e) {
@@ -102,6 +103,30 @@ public class ImageUtil {
 			}
 			fileOrPath.delete();
 		}
+	}
+	/**
+	 * 处理详情图，并返回新生成图片的相对值路径
+	 * @param thumbnail
+	 * @param targetAddr
+	 * @return
+	 */
+	public static String generateNormalImg(ImageHolder thumbnail, String targetAddr) {
+		String realFileName = getRandomFileName();
+		String extension = getFileExtension(thumbnail.getImageName());
+		makeDirPath(targetAddr);
+		String relativeAddr = targetAddr + realFileName + extension;
+		logger.debug("current complete addrr is:" + PathUtil.getImgBasePath() + relativeAddr);
+		File dest = new File(PathUtil.getImgBasePath() + relativeAddr);
+		File waterMark = new File(basePath + "\\watermark.jpg");
+		try {
+			Thumbnails.of(thumbnail.getImage()).size(337, 640)
+			.watermark(Positions.BOTTOM_RIGHT, ImageIO.read(waterMark), 0.5f)
+			.outputQuality(0.9f).toFile(dest);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return relativeAddr;
 	}
 
 	public static void main(String[] args) throws IOException {

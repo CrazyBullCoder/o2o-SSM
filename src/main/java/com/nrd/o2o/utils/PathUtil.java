@@ -15,6 +15,12 @@ public class PathUtil {
 		return basePath;
 	}
 
+	/**
+	 * 图片的相对路径
+	 * 
+	 * @param shopId 商铺id
+	 * @return "/upload/item/shop/" + shopId + "/"
+	 */
 	public static String getShopImagePath(long shopId) {
 		String imagePath = "/upload/item/shop/" + shopId + "/";
 		return imagePath.replace("/", seperator);

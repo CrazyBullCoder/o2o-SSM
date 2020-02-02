@@ -2,6 +2,7 @@ package com.nrd.o2o.service;
 
 import java.io.InputStream;
 
+import com.nrd.o2o.dto.ImageHolder;
 import com.nrd.o2o.dto.ShopExecution;
 import com.nrd.o2o.entity.Shop;
 import com.nrd.o2o.exceptions.ShopOperationException;
@@ -29,7 +30,7 @@ public interface ShopService {
 	 * @return
 	 * @throws ShopOperationException
 	 */
-	ShopExecution modifyShop(Shop shop, InputStream shopImgInputStream, String fileName) throws ShopOperationException;
+	ShopExecution modifyShop(Shop shop, ImageHolder thumbnail) throws ShopOperationException;
 
 	/**
 	 * 注册店铺信息,包括对图片的处理
@@ -39,5 +40,5 @@ public interface ShopService {
 	 * @return
 	 * @throws ShopOperationException
 	 */
-	ShopExecution addShop(Shop shop, InputStream shopImgInputStream, String fileName) throws ShopOperationException;
+	ShopExecution addShop(Shop shop, ImageHolder thumbnail) throws ShopOperationException;
 }

@@ -8,7 +8,7 @@ public class HeadLine {
 	private String lineLink;
 	private String lineImg;
 	private Integer priority;
-	private Integer enableTime;
+	private Integer enableStatus;
 	private Date createTime;
 	private Date lastEditTime;
 
@@ -52,14 +52,6 @@ public class HeadLine {
 		this.priority = priority;
 	}
 
-	public Integer getEnableTime() {
-		return enableTime;
-	}
-
-	public void setEnableTime(Integer enableTime) {
-		this.enableTime = enableTime;
-	}
-
 	public Date getCreateTime() {
 		return createTime;
 	}
@@ -75,5 +67,13 @@ public class HeadLine {
 	public void setLastEditTime(Date lastEditTime) {
 		this.lastEditTime = lastEditTime;
 	}
-	
+
+	public Integer getEnableStatus() {
+		return enableStatus;
+	}
+
+	public void setEnableStatus(Integer enableStatus) {
+		this.enableStatus = enableStatus;
+	}
+
 }

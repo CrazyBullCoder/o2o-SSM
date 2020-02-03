@@ -5,8 +5,8 @@ import java.util.Date;
 public class ShopCategory {
 	private Long shopCategoryId;
 	private String shopCategoryName;
-	private String shopCateforyDesc;
-	private String shopCateforyImg;
+	private String shopCategoryDesc;
+	private String shopCategoryImg;
 	private Integer priority;
 	private Date createTime;
 	private Date lastEditTime;
@@ -28,21 +28,7 @@ public class ShopCategory {
 		this.shopCategoryName = shopCateforyName;
 	}
 
-	public String getShopCateforyDesc() {
-		return shopCateforyDesc;
-	}
-
-	public void setShopCateforyDesc(String shopCateforyDesc) {
-		this.shopCateforyDesc = shopCateforyDesc;
-	}
-
-	public String getShopCateforyImg() {
-		return shopCateforyImg;
-	}
-
-	public void setShopCateforyImg(String shopCateforyImg) {
-		this.shopCateforyImg = shopCateforyImg;
-	}
+	
 
 	public Integer getPriority() {
 		return priority;
@@ -74,5 +60,25 @@ public class ShopCategory {
 
 	public void setParent(ShopCategory parent) {
 		this.parent = parent;
+	}
+
+	public String getShopCategoryDesc() {
+		return shopCategoryDesc;
+	}
+
+	public void setShopCategoryDesc(String shopCategoryDesc) {
+		this.shopCategoryDesc = shopCategoryDesc;
+	}
+
+	public String getShopCategoryImg() {
+		return shopCategoryImg;
+	}
+
+	public void setShopCategoryImg(String shopCategoryImg) {
+		this.shopCategoryImg = shopCategoryImg;
+	}
+
+	public void setShopCategoryName(String shopCategoryName) {
+		this.shopCategoryName = shopCategoryName;
 	}
 }
